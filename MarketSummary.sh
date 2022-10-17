@@ -7,6 +7,11 @@ echo 'Running Market Summary...'
 
 apiKey=$(cat apiKey.txt)
 
-cmd= curl -X "GET" "https://yfapi.net/v6/finance/quote/marketSummary?lang=en&region=US" -H "accept: application/json" -H "X-API-KEY: ${apiKey}"
-
+if [ $# -eq 0 ]
+then
+	cmd= curl -X "GET" "https://yfapi.net/v6/finance/quote/marketSummary?lang=en&region=US" -H "accept: application/json" -H "X-API-KEY: ${apiKey}"
+else
+	sym=$1
+	cmd= curl -X "GET" "https://yfapi.net/v6/finance/quote?lang=en&region=US&symbols=${sym}" -H "accept: application/json" -H "X-API-KEY: ${apiKey}"
+fi
 #end
